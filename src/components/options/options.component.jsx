@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import Option from '../option/option.component'
-
+import './options.styles.css'
 
 // const handleRemoveAll= (e)=> {
 //     console.log(e.options)
@@ -10,15 +10,17 @@ import Option from '../option/option.component'
 
 function Options(props) {
 
- 
- 
-    
-
-
     return (
         <div>
-            <button onClick={props.handleDeleteOption} >Remove All</button>
-            {props.options.map((options) => <Option key={options} optionText={options}/>)}
+            {props.options.length === 0 && <p>Please add option to store </p>}
+            
+            <button className='buttonRemveAll' onClick={props.handleDeleteAll} >Remove All</button>
+            {props.options.map((options) =>
+                <Option
+                key={options}
+                optionText={options}
+                handleDeleteOption={props.handleDeleteOption}
+            />)}
         </div>
     )
     

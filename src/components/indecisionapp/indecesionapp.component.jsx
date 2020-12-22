@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Action from '../action/action.component';
 import Addoption from '../addoption/addoption.component';
 import Header from '../header/header.component';
@@ -15,10 +15,16 @@ const subtitle = 'Put your life in the hands of a computer.';
 function Indecesionapp() {
 
 
+
+
     const [options , setOption] = useState([])
 
+    const handleDeleteOption = (takeOptions) => {
+        setOption(options.filter((item)=> item !==takeOptions ))
+    }
+        
 
-    const handleDeleteOption = () => {
+    const handleDeleteAll = () => {
         setOption([]);
     }
 
@@ -35,12 +41,32 @@ function Indecesionapp() {
             return 'Enter valid value to add item'
         } else if (options.indexOf(option) > -1 ){
             return 'This item already exist !'
-        } else {
-            setOption([...options,option]);
         }
 
+         setOption([...options,option]);
     }
 
+
+    useEffect(() => {
+        const notesData = JSON.parse(localStorage.getItem('options'));
+        if (notesData) {
+            setOption(notesData);
+        }
+    }, [])
+    //     try {
+    //         const notesData = JSON.parse(localStorage.getItem('options'));
+    //         if (notesData) {
+    //             setOption(notesData);
+    //         }
+    //     } catch (e) {
+    //         console.log('there is no data')
+    //     }
+       
+    // }, [])
+    
+    useEffect(() => {
+        localStorage.setItem('options', JSON.stringify(options), [options]);
+    }, [options]);
 
     return (
         <div>
@@ -51,6 +77,7 @@ function Indecesionapp() {
             />
             <Options
                 options={options}
+                handleDeleteAll={handleDeleteAll}
                 handleDeleteOption={handleDeleteOption}
             />
             <Addoption

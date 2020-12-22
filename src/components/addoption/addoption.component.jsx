@@ -1,10 +1,9 @@
 import React,{useState} from 'react'
-
+import './addoption.styles.css'
 
 function Addoption(props) {
     
     const [errors,setError] = useState(undefined)
-
 
     const handleAddOption = (e) => {
 
@@ -12,18 +11,24 @@ function Addoption(props) {
         const option = e.target.elements.option.value.trim();
         const error = props.handleAddOption(option);
         setError(error);
-    
+
+        if (!error) {
+            e.target.elements.option.value = '';
+        }
     }
         
             
       
 
     return (
-        <div>
+        <div className='formdiv'>
             {errors && <p>{errors}</p> }
-            <form onSubmit={handleAddOption}>
+            <form className='form' onSubmit={handleAddOption}>
                 <input type='text' name='option' />
-                <button >Add Option</button>
+                
+                    <button className='buttonAdd' >Add Option</button>
+               
+               
             </form>
         </div>
     )
