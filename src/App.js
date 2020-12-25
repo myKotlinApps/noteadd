@@ -10,7 +10,7 @@ function App(props) {
 
 
   return (
-    <div>
+    <div className='App'>
       <Indecesionapp />
       {/* <hr></hr>
       <Count/>

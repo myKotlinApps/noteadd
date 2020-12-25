@@ -15,7 +15,6 @@
 	padding:6px 10px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffffff;
-	margin-left: 10px;
 }
 .buttonAction:hover {
 	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);

@@ -17,7 +17,7 @@ function Options(props) {
             <button className='buttonRemveAll' onClick={props.handleDeleteAll} >Remove All</button>
             {props.options.map((options) =>
                 <Option
-                key={options}
+                key={Math.floor(Math.random()*1000000)}
                 optionText={options}
                 handleDeleteOption={props.handleDeleteOption}
             />)}

@@ -2,12 +2,15 @@ import React,{useState,useEffect} from 'react'
 import Action from '../action/action.component';
 import Addoption from '../addoption/addoption.component';
 import Header from '../header/header.component';
+import OptionModal from '../modal/modal.component';
 import Options from '../options/options.component';
+
+
+import '../indecisionapp/indecesion.styles.css'
 
 const title = 'Indecesion';
 const subtitle = 'Put your life in the hands of a computer.';
 // const options = ['Thing one','Thing two','Thing three'];
-
 
 
 
@@ -17,7 +20,8 @@ function Indecesionapp() {
 
 
 
-    const [options , setOption] = useState([])
+    const [options, setOption] = useState([]);
+    let [selectedOption, setSelectedOption] = useState(undefined);
 
     const handleDeleteOption = (takeOptions) => {
         setOption(options.filter((item)=> item !==takeOptions ))
@@ -30,9 +34,9 @@ function Indecesionapp() {
 
     const handlePick = () =>{
         const randomNumber = Math.floor(Math.random() * options.length);
-        const option = options[randomNumber];
-        alert(option);
-    }
+        const option = options[randomNumber]; 
+        setSelectedOption(selectedOption= option)
+    } 
 
     
     const handleAddOption = (option) => {
@@ -46,6 +50,10 @@ function Indecesionapp() {
          setOption([...options,option]);
     }
 
+
+    const handleSelectedOption = () => {
+        setSelectedOption(setSelectedOption=null)
+    }
 
     useEffect(() => {
         const notesData = JSON.parse(localStorage.getItem('options'));
@@ -69,7 +77,8 @@ function Indecesionapp() {
     }, [options]);
 
     return (
-        <div>
+        <div className='indecesionStyle'>
+            
             <Header title={title} subtitle={subtitle}/>
             <Action
                 hasOption={options.length > 0}
@@ -83,6 +92,10 @@ function Indecesionapp() {
             <Addoption
                 handleAddOption={handleAddOption}
             /> 
+            <OptionModal
+                selectedOption={selectedOption}
+                handleSelectedOption={handleSelectedOption}
+            />
         </div>
     )
 }
