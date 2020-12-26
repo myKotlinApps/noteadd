@@ -1,9 +1,14 @@
 import React from 'react'
 
+
+
 function Option(props) {
+    let i = 0;
+    
+    
     return (
         <div>
-          { ` Option :  ${props.optionText}`}
+            { ` ${props.count} -  ${props.optionText}`}
             <button onClick={(e) => {
                 props.handleDeleteOption(props.optionText);
             }}
